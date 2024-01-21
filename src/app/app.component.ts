@@ -15,7 +15,5 @@ import {SideBarComponent} from "./Components/side-bar/side-bar.component";
 })
 export class AppComponent {
   title = 'AngularProject';
-  x =  15;
-  y = 15;
-  z = this.x+this.y;
+
 }
