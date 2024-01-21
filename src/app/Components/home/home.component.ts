@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {StoredData} from "../../Model/stored-data";
+import {StoredData} from "../../../Model/stored-data";
 import {NgForOf, NgIf, NgStyle} from "@angular/common";
 
 @Component({

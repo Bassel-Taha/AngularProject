@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import {ProductsList} from "../../../../Model/products-list";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf
+  ],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss'
 })
