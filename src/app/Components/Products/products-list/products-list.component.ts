@@ -1,19 +1,42 @@
 import { Component } from '@angular/core';
 import {ProductsList} from "../../../../Model/products-list";
 import {NgForOf} from "@angular/common";
+import {FormsModule} from "@angular/forms";
+import {Categories} from "../../../../Model/categories";
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    FormsModule
   ],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss'
 })
 export class ProductsListComponent {
   ListOfProducts:ProductsList[];
+  TotalPriceOfProduct:number = 0;
+  CategoryList : Categories [];
   constructor() {
+    this.CategoryList = [
+      {
+      ID : 1,
+      Name : "laptop"
+      },
+      {
+        ID : 2,
+        Name : "Mobiles"
+      },
+      {
+        ID:3,
+        Name:"desktops"
+      },
+      {
+        ID:4,
+        Name:"Tablets"
+      }
+    ]
     this.ListOfProducts=[
       {
         ID:100,
@@ -50,4 +73,12 @@ export class ProductsListComponent {
       ]
   }
 
+  TotalPriceCalc(ProductPrice:number , QuantityWantedProduct:any )
+  {
+      this.TotalPriceOfProduct =  Number(QuantityWantedProduct) * ProductPrice;
+
+  }
+
+  protected readonly Number = Number;
+  selectedCategoryID?: number ;
 }

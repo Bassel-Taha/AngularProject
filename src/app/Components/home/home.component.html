@@ -1,12 +1,12 @@
 <div class="container-fluid p-0 m-0" style="width: 100% ">
-<img  *ngIf="IsImageShowen" class="m-0 img-fluid" src="{{Data.bgImage}}" style="width: 100%">
+<img  *ngIf="IsImageShowen" class="m-0 img-fluid" src="{{Data.bgImage}}" style="width: 100%" alt="">
   <div class="container-fluid">
     <div class="row m-0">
       <div class="col-10">
         <h1 class="ms-5">{{Data.name}}</h1>
       </div>
       <div class="col-2 ">
-        <button class="btn btn-outline-dark position-absolute end-0 m-1" (click)="ToggleImage()"  >Shwo/Hide Image</button>
+        <button class="btn btn-outline-dark position-absolute end-0 m-1" (click)="ToggleImage()"  >Show/Hide Image</button>
       </div>
     </div>
   </div>
