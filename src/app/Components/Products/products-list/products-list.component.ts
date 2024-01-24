@@ -80,5 +80,5 @@ export class ProductsListComponent {
   }
 
   protected readonly Number = Number;
-  selectedCategoryID?: number ;
+  selectedCategoryID?: number | string = "Select Category" ;
 }
