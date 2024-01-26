@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import {ProductsList} from "../../../../Model/products-list";
-import {NgForOf} from "@angular/common";
+import {Component, OnChanges, SimpleChanges} from '@angular/core';
+import {IProductsList} from "../../../../Model/i-products-list";
+import {CurrencyPipe, NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {Categories} from "../../../../Model/categories";
 
@@ -9,76 +9,128 @@ import {Categories} from "../../../../Model/categories";
   standalone: true,
   imports: [
     NgForOf,
-    FormsModule
+    FormsModule,
+    CurrencyPipe
   ],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss'
 })
+
+
 export class ProductsListComponent {
-  ListOfProducts:ProductsList[];
-  TotalPriceOfProduct:number = 0;
-  CategoryList : Categories [];
+  ListOfProducts: IProductsList[];
+  TotalPriceOfProduct: number = 0;
+  CategoryList: Categories [];
+  ProductsListByCategory: IProductsList[] = [];
+
+
   constructor() {
     this.CategoryList = [
       {
-      ID : 1,
-      Name : "laptop"
+        ID: 1,
+        Name: "laptop"
       },
       {
-        ID : 2,
-        Name : "Mobiles"
+        ID: 2,
+        Name: "Mobiles"
       },
       {
-        ID:3,
-        Name:"desktops"
+        ID: 3,
+        Name: "desktops"
       },
       {
-        ID:4,
-        Name:"Tablets"
+        ID: 4,
+        Name: "Tablets"
       }
     ]
-    this.ListOfProducts=[
+    this.ListOfProducts = [
       {
-        ID:100,
-        Name:'Lenovo Y520',
-        Price:15000,
-         Quantity:1,
-        CategoryID:1,
-        ImgUrl:"https://th.bing.com/th/id/OIP.Bha841YBUq6Bx4OA_6SBaQHaFj?rs=1&pid=ImgDetMain"
+        ID: 100,
+        Name: 'Lenovo Y520',
+        Price: 15000,
+        Quantity: 1,
+        CategoryID: 1,
+        ImgUrl: "https://th.bing.com/th/id/OIP.Bha841YBUq6Bx4OA_6SBaQHaFj?rs=1&pid=ImgDetMain",
+        totalPriceOfSelectedQuatities :0,
+        selectedQuantitiesOfProduct : 0
+
       },
       {
-        ID : 200,
-        Name : 'legion 5',
-        Price : 35000,
-        Quantity : 2,
-        CategoryID : 1,
-        ImgUrl:"https://th.bing.com/th/id/R.1b48232bed11b3988d38772e7bd75476?rik=h5rgDst6yhsAtQ&pid=ImgRaw&r=0"
+        ID: 200,
+        Name: 'legion 5',
+        Price: 35000,
+        Quantity: 2,
+        CategoryID: 1,
+        ImgUrl: "https://th.bing.com/th/id/R.1b48232bed11b3988d38772e7bd75476?rik=h5rgDst6yhsAtQ&pid=ImgRaw&r=0",
+        totalPriceOfSelectedQuatities :0,
+        selectedQuantitiesOfProduct : 0
+
+
       },
       {
-        ID : 300,
-        Name : 'Note10+',
-        Price : 15000,
-        Quantity : 2,
-        CategoryID : 2,
-        ImgUrl:"https://th.bing.com/th/id/OIP.MkZSA_Rn7EQXv7UNxrhLdwHaHa?rs=1&pid=ImgDetMain"
+        ID: 300,
+        Name: 'Note10+',
+        Price: 15000,
+        Quantity: 2,
+        CategoryID: 2,
+        ImgUrl: "https://th.bing.com/th/id/OIP.MkZSA_Rn7EQXv7UNxrhLdwHaHa?rs=1&pid=ImgDetMain",
+        totalPriceOfSelectedQuatities :0,
+        selectedQuantitiesOfProduct : 0
+
+
       },
       {
-        ID : 400,
-        Name : 'Dell G15',
-        Price : 30000,
-        Quantity : 1,
-        CategoryID : 1,
-        ImgUrl:"https://th.bing.com/th/id/OIP.VAQ7AP-jLts_OZ1bnC4ggQHaEK?rs=1&pid=ImgDetMain"
+        ID: 400,
+        Name: 'Dell G15',
+        Price: 30000,
+        Quantity: 1,
+        CategoryID: 1,
+        ImgUrl: "https://th.bing.com/th/id/OIP.VAQ7AP-jLts_OZ1bnC4ggQHaEK?rs=1&pid=ImgDetMain",
+        totalPriceOfSelectedQuatities :0,
+        selectedQuantitiesOfProduct : 0
+
       }
-      ]
+    ]
+   /* calling ths methode to initialize the ProductsListByCategory during the first run of the page*/
+    this.OnChangeSelectedCategory();
+
   }
+
+
 
   TotalPriceCalc(ProductPrice:number , QuantityWantedProduct:any )
   {
-      this.TotalPriceOfProduct =  Number(QuantityWantedProduct) * ProductPrice;
+    let temp : number = 0;
+    this.TotalPriceOfProduct = 0;
+    // @ts-ignore
+    this.ProductsListByCategory.forEach( prod => prod.totalPriceOfSelectedQuatities = prod.selectedQuantitiesOfProduct* prod.Price)
+    // @ts-ignore
+     this.ProductsListByCategory.forEach(prop =>
+     {
+       // @ts-ignore
+       temp = temp +prop.totalPriceOfSelectedQuatities
+     });
+    this.TotalPriceOfProduct = temp
 
   }
 
+
+
+
   protected readonly Number = Number;
   selectedCategoryID?: number | string = "Select Category" ;
+
+
+
+
+
+  OnChangeSelectedCategory()   {
+    if (this.selectedCategoryID == "Select Category"){
+      this.ProductsListByCategory = this.ListOfProducts
+    }
+    else
+    {
+      this.ProductsListByCategory = this.ListOfProducts.filter( prod => prod.CategoryID == this.selectedCategoryID);
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {StoredData} from "../../../Model/stored-data";
 import {NgForOf, NgIf, NgStyle} from "@angular/common";
+import {ProductsListComponent} from "../Products/products-list/products-list.component";
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,8 @@ import {NgForOf, NgIf, NgStyle} from "@angular/common";
   imports: [
     NgStyle,
     NgForOf,
-    NgIf
+    NgIf,
+    ProductsListComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -18,7 +20,7 @@ export class HomeComponent {
   backgroundImage:string
   IsImageShowen:boolean = true;
   constructor() {
-    this.Data = new StoredData("https://picsum.photos/1168/250", "Bassel Taha ", ["portsaid", "cairo", "alexandria", "damieta"])
+    this.Data = new StoredData("https://picsum.photos/1168/250", "Bassel Taha ", ["portsaid", "cairo", "damieta"])
     this.backgroundImage = this.Data.bgImage
   }
 
