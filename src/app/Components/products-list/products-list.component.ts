@@ -1,8 +1,9 @@
-import {Component, Input, input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {IProductsList} from "../../../Model/i-products-list";
-import {CurrencyPipe, NgForOf} from "@angular/common";
+import {CurrencyPipe, NgForOf, NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {Categories} from "../../../Model/categories";
+import {LightHouseDirective} from "../../Direectives/light-house.directive";
 
 @Component({
   selector: 'app-products-list',
@@ -10,7 +11,9 @@ import {Categories} from "../../../Model/categories";
   imports: [
     NgForOf,
     FormsModule,
-    CurrencyPipe
+    CurrencyPipe,
+    LightHouseDirective,
+    NgOptimizedImage
   ],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss'
@@ -19,13 +22,17 @@ import {Categories} from "../../../Model/categories";
 
 export class ProductsListComponent implements OnChanges{
   ListOfProducts: IProductsList[];
-  TotalPriceOfProducts: number = 0;
+  /*TotalPriceOfProducts: number = 0;*/
   CategoryList: Categories [];
   ProductsListByCategory: IProductsList[] = [];
   @Input() SentCategoryID?: number | string = "Select Category" ;
 
+  @Output()  TotalPriceEvent : EventEmitter<any> ;
+
+
   constructor() {
 
+    this.TotalPriceEvent = new EventEmitter<any>();
     /*the list of categories */
     this.CategoryList = [
       {
@@ -109,17 +116,22 @@ export class ProductsListComponent implements OnChanges{
 
   TotalPriceCalc(ProductPrice:number , QuantityWantedProduct:any )
   {
-    let temp : number = 0;
-    this.TotalPriceOfProducts = 0;
-    // @ts-ignore
-    this.ProductsListByCategory.forEach( prod => prod.totalPriceOfSelectedQuatities = prod.selectedQuantitiesOfProduct* prod.Price)
-    // @ts-ignore
-     this.ProductsListByCategory.forEach(prop =>
-     {
-       // @ts-ignore
-       temp = temp +prop.totalPriceOfSelectedQuatities
-     });
-    this.TotalPriceOfProducts = temp
+
+    this.TotalPriceEvent.emit(this.ProductsListByCategory);
+
+
+    /*all that code below is for calculating the total price in these components but the calculation is going to happen in the order component*/
+    /* let temp : number = 0;
+     this.TotalPriceOfProducts = 0;
+     // @ts-ignore
+     this.ProductsListByCategory.forEach( prod => prod.totalPriceOfSelectedQuatities = prod.selectedQuantitiesOfProduct* prod.Price)
+     // @ts-ignore
+      this.ProductsListByCategory.forEach(prop =>
+      {
+        // @ts-ignore
+        temp = temp +prop.totalPriceOfSelectedQuatities
+      });
+     this.TotalPriceOfProducts = temp*/
 
   }
 

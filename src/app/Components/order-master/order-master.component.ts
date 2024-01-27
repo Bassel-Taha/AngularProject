@@ -18,9 +18,10 @@ import {ProductsListComponent} from "../products-list/products-list.component";
 })
 export class OrderMasterComponent
 {
-  ProductsListByCategory: IProductsList[] = [];
+
+  ProductsListByCategory?: IProductsList[] ;
   CategoryList: Categories [];
-  selectedCategoryID?: number | string = "Select Category" ;
+  selectedCategoryID_InTheMasterOrder?: number | string = "Select Category" ;
   TotalPriceOfProducts: number = 0;
 
   constructor()
@@ -45,13 +46,20 @@ export class OrderMasterComponent
   ]
 }
 
-  OnChangeSelectedCategory()   {
-    /*if (this.selectedCategoryID == "Select Category"){
-      this.ProductsListByCategory = this.ListOfProducts
-    }
-    else
+  TotalPriceCalc(ProductsListByCategoryFromProductComponent : IProductsList[])
+  {
+    this.ProductsListByCategory = ProductsListByCategoryFromProductComponent ;
+
+    let temp: number = 0;
+    this.TotalPriceOfProducts = 0;
+    // @ts-ignore
+    this.ProductsListByCategory.forEach(prod => prod.totalPriceOfSelectedQuatities = prod.selectedQuantitiesOfProduct * prod.Price)
+    // @ts-ignore
+    this.ProductsListByCategory.forEach(prop =>
     {
-      this.ProductsListByCategory = this.ListOfProducts.filter( prod => prod.CategoryID == this.selectedCategoryID);
-    }*/
+      // @ts-ignore
+      temp = temp + prop.totalPriceOfSelectedQuatities;
+    });
+    this.TotalPriceOfProducts = temp
   }
 }

@@ -4,7 +4,7 @@
 
   <div class="m-3 row justify-content-center align-content-center">
     <div>
-      <select class="form-select" aria-label="Disabled select example" [(ngModel)]="selectedCategoryID" (change)="OnChangeSelectedCategory()">
+      <select class="form-select" aria-label="Disabled select example" [(ngModel)]="selectedCategoryID_InTheMasterOrder" >
         <option selected>Select Category</option>
         <option *ngFor="let category of CategoryList" value="{{category.ID}}">{{ category.Name }}</option>
       </select>
@@ -13,14 +13,16 @@
     <div class="card text-bg-success m-3 " style="max-width: 18rem;">
       <div class="card-header text-center">Categories</div>
       <div class="card-body text-center">
-        <h5 class="card-title">The Selected category = {{ selectedCategoryID }}</h5>
+        <h5 class="card-title">The Selected category = {{ selectedCategoryID_InTheMasterOrder }}</h5>
       </div>
     </div>
   </div>
   <hr class="border border-bottom-5 border-black col-11">
 
   <!--the products component-->
-  <app-products-list class="m-4 bg-dark-subtle" [SentCategoryID]="selectedCategoryID"></app-products-list>
+  <app-products-list class="m-4 bg-dark-subtle"
+                     [SentCategoryID]="selectedCategoryID_InTheMasterOrder"
+                     (TotalPriceEvent)="TotalPriceCalc($event)"></app-products-list>
 
   <hr class="border border-bottom-3 border-black col-11">
 <div class="mt-2">
