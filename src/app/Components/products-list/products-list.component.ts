@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {IProductsList} from "../../../Model/i-products-list";
+import {IProduct} from "../../../Model/i-product";
 import {CurrencyPipe, NgForOf, NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {Categories} from "../../../Model/categories";
@@ -21,10 +21,10 @@ import {LightHouseDirective} from "../../Direectives/light-house.directive";
 
 
 export class ProductsListComponent implements OnChanges{
-  ListOfProducts: IProductsList[];
+  ListOfProducts: IProduct[];
   /*TotalPriceOfProducts: number = 0;*/
   CategoryList: Categories [];
-  ProductsListByCategory: IProductsList[] = [];
+  ProductsListByCategory: IProduct[] = [];
   @Input() SentCategoryID?: number | string = "Select Category" ;
 
   @Output()  TotalPriceEvent : EventEmitter<any> ;
@@ -114,7 +114,7 @@ export class ProductsListComponent implements OnChanges{
 
 
 
-  TotalPriceCalc(ProductPrice:number , QuantityWantedProduct:any )
+  BuyButtonClick(ProductPrice:number , QuantityWantedProduct:any )
   {
 
     this.TotalPriceEvent.emit(this.ProductsListByCategory);

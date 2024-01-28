@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {Categories} from "../../../Model/categories";
-import {IProductsList} from "../../../Model/i-products-list";
+import {IProduct} from "../../../Model/i-product";
 import {ProductsListComponent} from "../products-list/products-list.component";
 
 @Component({
@@ -16,13 +16,14 @@ import {ProductsListComponent} from "../products-list/products-list.component";
   templateUrl: './order-master.component.html',
   styleUrl: './order-master.component.scss'
 })
-export class OrderMasterComponent
+export class OrderMasterComponent implements AfterViewInit
 {
 
-  ProductsListByCategory?: IProductsList[] ;
+  ProductsListByCategory?: IProduct[] ;
   CategoryList: Categories [];
   selectedCategoryID_InTheMasterOrder?: number | string = "Select Category" ;
   TotalPriceOfProducts: number = 0;
+  @ViewChild(ProductsListComponent) productComponentObj! : ProductsListComponent ;
 
   constructor()
 {
@@ -46,7 +47,12 @@ export class OrderMasterComponent
   ]
 }
 
-  TotalPriceCalc(ProductsListByCategoryFromProductComponent : IProductsList[])
+  ngAfterViewInit(): void
+  {
+     productsList  =  this.ListOfSelectedProductsWithTheQuantities(this.productComponentObj.ProductsListByCategory)
+  }
+
+  TotalPriceCalc(ProductsListByCategoryFromProductComponent : IProduct[])
   {
     this.ProductsListByCategory = ProductsListByCategoryFromProductComponent ;
 
@@ -61,5 +67,18 @@ export class OrderMasterComponent
       temp = temp + prop.totalPriceOfSelectedQuatities;
     });
     this.TotalPriceOfProducts = temp
+  }
+
+  ListOfSelectedProductsWithTheQuantities(allProductsFromTheProductComponent : IProduct[]) : IProduct[]
+  {
+    let selectedProducts : IProduct[] = {} as IProduct[];
+    for (let product of allProductsFromTheProductComponent)
+    {
+      if (product.Quantity > 0)
+      {
+        selectedProducts.push(product)
+      }
+    }
+    return selectedProducts;
   }
 }
