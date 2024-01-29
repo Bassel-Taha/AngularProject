@@ -24,6 +24,7 @@ export class OrderMasterComponent implements AfterViewInit
   selectedCategoryID_InTheMasterOrder?: number | string = "Select Category" ;
   TotalPriceOfProducts: number = 0;
   @ViewChild(ProductsListComponent) productComponentObj! : ProductsListComponent ;
+  selectedProductsQuantities?  : IProduct[]
 
   constructor()
 {
@@ -49,7 +50,8 @@ export class OrderMasterComponent implements AfterViewInit
 
   ngAfterViewInit(): void
   {
-     productsList  =  this.ListOfSelectedProductsWithTheQuantities(this.productComponentObj.ProductsListByCategory)
+     this.selectedProductsQuantities  =  this.ListOfSelectedProductsWithTheQuantities(this.productComponentObj.ProductsListByCategory)
+
   }
 
   TotalPriceCalc(ProductsListByCategoryFromProductComponent : IProduct[])
