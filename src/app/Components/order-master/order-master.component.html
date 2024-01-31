@@ -12,15 +12,14 @@
         <option *ngFor="let category of CategoryList" value="{{category.ID}}">{{ category.Name }}</option>
       </select>
     </div>
-    <!--for displaying the change of the category prop-->
-    <div class="card text-bg-success m-3 " style="max-width: 18rem;">
+    <!--for displaying the change of the category prop and gonna be removed later-->
+    <!--<div class="card text-bg-success m-3 " style="max-width: 18rem;">
       <div class="card-header text-center">Categories</div>
       <div class="card-body text-center">
         <h5 class="card-title">The Selected category = {{ selectedCategoryID_InTheMasterOrder }}</h5>
       </div>
-    </div>
+    </div>-->
   </div>
-  <hr class="border border-bottom-5 border-black col-11">
 
   <!--the products component-->
   <app-products-list class="m-4 bg-dark-subtle"

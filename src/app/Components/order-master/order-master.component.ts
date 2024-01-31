@@ -7,6 +7,7 @@ import {
   input,
   OnChanges,
   OnInit,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import {FormsModule} from "@angular/forms";
@@ -27,14 +28,14 @@ import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
   templateUrl: './order-master.component.html',
   styleUrl: './order-master.component.scss'
 })
-export class OrderMasterComponent implements AfterViewInit {
+export class OrderMasterComponent implements AfterViewInit, OnChanges {
 
   ProductsListByCategory?: IProduct[];
   CategoryList: Categories [];
   selectedCategoryID_InTheMasterOrder?: number | string = "Select Category";
   TotalPriceOfProducts: number = 0;
   @ViewChild(ProductsListComponent) productComponentObj!: ProductsListComponent;
-  selectedProductsQuantities! : IProduct[]
+  @Input() selectedProductsQuantities!: IProduct[]
 
 
   constructor() {
@@ -57,6 +58,10 @@ export class OrderMasterComponent implements AfterViewInit {
       }
     ]
   }
+
+  ngOnChanges(): void {
+    console.log(this.selectedProductsQuantities)
+    }
 
 
 
