@@ -2,9 +2,9 @@ export interface IProduct {
   ID: number ;
   Name: string;
   Price: number;
-  Quantity: number;
+  RemainingQuantity: number;
   ImgUrl?: string;
   CategoryID:number;
   totalPriceOfSelectedQuatities? : number;
-  selectedQuantitiesOfProduct? :number;
+  selectedQuantitiesToBuy? :number;
 }

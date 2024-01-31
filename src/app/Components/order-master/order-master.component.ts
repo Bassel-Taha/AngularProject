@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {Categories} from "../../../Model/categories";
 import {IProduct} from "../../../Model/i-product";
 import {ProductsListComponent} from "../products-list/products-list.component";
+import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
 
 @Component({
   selector: 'app-order-master',
@@ -16,42 +17,49 @@ import {ProductsListComponent} from "../products-list/products-list.component";
   templateUrl: './order-master.component.html',
   styleUrl: './order-master.component.scss'
 })
-export class OrderMasterComponent implements AfterViewInit
+export class OrderMasterComponent implements AfterViewInit, OnChanges , OnInit
 {
 
-  ProductsListByCategory?: IProduct[] ;
+  ProductsListByCategory?: IProduct[];
   CategoryList: Categories [];
-  selectedCategoryID_InTheMasterOrder?: number | string = "Select Category" ;
+  selectedCategoryID_InTheMasterOrder?: number | string = "Select Category";
   TotalPriceOfProducts: number = 0;
-  @ViewChild(ProductsListComponent) productComponentObj! : ProductsListComponent ;
-  selectedProductsQuantities?  : IProduct[]
+  @ViewChild(ProductsListComponent) productComponentObj!: ProductsListComponent;
+  selectedProductsQuantities!: IProduct[]
 
-  constructor()
-{
-  this.CategoryList = [
-    {
-      ID: 1,
-      Name: "laptop"
-    },
-    {
-      ID: 2,
-      Name: "Mobiles"
-    },
-    {
-      ID: 3,
-      Name: "desktops"
-    },
-    {
-      ID: 4,
-      Name: "Tablets"
+  constructor(private cd : ChangeDetectorRef) {
+    this.CategoryList = [
+      {
+        ID: 1,
+        Name: "laptop"
+      },
+      {
+        ID: 2,
+        Name: "Mobiles"
+      },
+      {
+        ID: 3,
+        Name: "desktops"
+      },
+      {
+        ID: 4,
+        Name: "Tablets"
+      }
+    ]
+  }
+
+  ngOnInit(): void {
+
     }
-  ]
-}
+
+  ngOnChanges(): void {
+
+    }
 
   ngAfterViewInit(): void
   {
-     this.selectedProductsQuantities  =  this.ListOfSelectedProductsWithTheQuantities(this.productComponentObj.ProductsListByCategory)
-
+    this.selectedProductsQuantities  =  this.ListOfSelectedProductsWithTheQuantities(this.productComponentObj.ProductsListByCategory)
+    this.cd.detectChanges()
   }
 
   TotalPriceCalc(ProductsListByCategoryFromProductComponent : IProduct[])
@@ -61,7 +69,7 @@ export class OrderMasterComponent implements AfterViewInit
     let temp: number = 0;
     this.TotalPriceOfProducts = 0;
     // @ts-ignore
-    this.ProductsListByCategory.forEach(prod => prod.totalPriceOfSelectedQuatities = prod.selectedQuantitiesOfProduct * prod.Price)
+    this.ProductsListByCategory.forEach(prod => prod.totalPriceOfSelectedQuatities = prod.selectedQuantitiesToBuy * prod.Price)
     // @ts-ignore
     this.ProductsListByCategory.forEach(prop =>
     {
@@ -70,13 +78,13 @@ export class OrderMasterComponent implements AfterViewInit
     });
     this.TotalPriceOfProducts = temp
   }
-
   ListOfSelectedProductsWithTheQuantities(allProductsFromTheProductComponent : IProduct[]) : IProduct[]
   {
-    let selectedProducts : IProduct[] = {} as IProduct[];
+    let selectedProducts : IProduct[] = [{}] as IProduct[]
     for (let product of allProductsFromTheProductComponent)
     {
-      if (product.Quantity > 0)
+
+      if (product.selectedQuantitiesToBuy! > 0 && product != null )
       {
         selectedProducts.push(product)
       }
