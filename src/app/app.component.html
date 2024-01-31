@@ -1,14 +1,19 @@
 <div class="container-fluid p-0 m-0">
-  <app-header class="p-0 m-0" style="width:100vw"></app-header>
- <div class="container-flued m-0 p-0">
-   <div class="row p-0 m-0" style="width: 100vw">
-     <app-side-bar class="p-0" style="width: 15%; height: 100%"></app-side-bar>
-     <!--<app-products-list class="p-0" style="width: 85%"></app-products-list>-->
-     <app-home class="p-0" style="width: 85%"></app-home>
-   </div>
- </div>
-
-  <app-footer></app-footer>
+  <header>
+    <div>
+      <app-header class="p-0 m-0" style="width:100vw"></app-header>
+    </div>
+  </header>
+  <section>
+    <div class="container-fluid m-0 p-0" style="height: 100vh">
+      <div class="row p-0 m-0" >
+        <app-side-bar class="p-0 m-0" style="width: 15%;"></app-side-bar>
+        <!--<app-products-list class="p-0" style="width: 85%"></app-products-list>-->
+        <app-home class="p-0" style="width: 85%"></app-home>
+        <app-footer class="col-12 p-0 m-0"></app-footer>
+      </div>
+    </div>
+  </section>
 </div>
 
 

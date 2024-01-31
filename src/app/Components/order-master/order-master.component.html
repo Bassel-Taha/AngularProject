@@ -25,7 +25,9 @@
   <!--the products component-->
   <app-products-list class="m-4 bg-dark-subtle"
                      [SentCategoryID]="selectedCategoryID_InTheMasterOrder"
-                     (TotalPriceEvent)="TotalPriceCalc($event)"></app-products-list>
+                     (ProductsQuantitiesEvent)="selectedProductsQuantities"
+                     (TotalPriceEvent)="TotalPriceCalc($event)"
+                     ></app-products-list>
 
   <hr class="border border-bottom-3 border-black col-11">
   <div class="mt-2">
@@ -38,7 +40,7 @@
 
   <div class="row justify-content-center">
 
-    <table class="table col-11">
+    <table class="table col-11 m-3">
       <thead>
       <tr>
         <th scope="col">no</th>
@@ -49,19 +51,21 @@
       </tr>
       </thead>
       <tbody>
-        @if (selectedProductsQuantities != undefined || selectedProductsQuantities != null) {
-          @for (product of selectedProductsQuantities; track $index) {
+          @for (product of selectedProductsQuantities!; track $index) {
             <tr>
               <th scope="row">{{$index +1 }}</th>
               <td>{{ product.Name }}</td>
               <td>{{ product.Price }}</td>
-              <td><input type="number" class="form-control border border-1" [(ngModel)]="product.selectedQuantitiesToBuy!"></td>
+              <td><input type="number" class=" row form-control border border-1 col-1" [(ngModel)]="product.selectedQuantitiesToBuy!"></td>
               <td class="fw-bold">{{ product.selectedQuantitiesToBuy! * product.Price }}</td>
             </tr>
           }
-        }
       </tbody>
     </table>
   </div>
+  <div class="row justify-content-end mx-5">
+    <button class="btn btn-lg btn-outline-primary mx-5 my-4 col-2">Place Order</button>
+  </div>
+
 </div>
 

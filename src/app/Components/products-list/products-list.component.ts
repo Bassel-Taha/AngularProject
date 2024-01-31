@@ -26,13 +26,15 @@ export class ProductsListComponent implements OnChanges{
   CategoryList: Categories [];
   ProductsListByCategory: IProduct[] = [];
   @Input() SentCategoryID?: number | string = "Select Category" ;
-
+  @Input() selectedProductsQuantities!: IProduct[]
   @Output()  TotalPriceEvent : EventEmitter<any> ;
+  @Output()  ProductsQuantitiesEvent : EventEmitter<any> ;
 
 
   constructor() {
 
     this.TotalPriceEvent = new EventEmitter<any>();
+    this.ProductsQuantitiesEvent = new EventEmitter<any>();
     /*the list of categories */
     this.CategoryList = [
       {
@@ -110,6 +112,7 @@ export class ProductsListComponent implements OnChanges{
 
   ngOnChanges(): void {
        this.OnChangeSelectedCategory();
+        this.selectedProductsQuantities = this.ListOfSelectedProductsWithTheQuantities(this.ProductsListByCategory)
     }
 
 
@@ -118,20 +121,8 @@ export class ProductsListComponent implements OnChanges{
   {
 
     this.TotalPriceEvent.emit(this.ProductsListByCategory);
-
-
-    /*all that code below is for calculating the total price in these components but the calculation is going to happen in the order component*/
-    /* let temp : number = 0;
-     this.TotalPriceOfProducts = 0;
-     // @ts-ignore
-     this.ProductsListByCategory.forEach( prod => prod.totalPriceOfSelectedQuatities = prod.selectedQuantitiesOfProduct* prod.Price)
-     // @ts-ignore
-      this.ProductsListByCategory.forEach(prop =>
-      {
-        // @ts-ignore
-        temp = temp +prop.totalPriceOfSelectedQuatities
-      });
-     this.TotalPriceOfProducts = temp*/
+    this.selectedProductsQuantities = this.ListOfSelectedProductsWithTheQuantities(this.ProductsListByCategory)
+    this.ProductsQuantitiesEvent.emit(this.selectedProductsQuantities)
 
   }
 
@@ -147,4 +138,32 @@ export class ProductsListComponent implements OnChanges{
     }
   }
 
+
+  ListOfSelectedProductsWithTheQuantities(allProductsFromTheProductComponent: IProduct[]): IProduct[] {
+    let selectedProducts: IProduct[] = [] as IProduct[]
+    for (let product of allProductsFromTheProductComponent) {
+
+      if (product.selectedQuantitiesToBuy! > 0 && product != null) {
+        selectedProducts.push(product)
+      }
+    }
+    console.log(selectedProducts)
+    return selectedProducts;
+  }
 }
+
+
+
+
+/*all that code below is for calculating the total price in these components but the calculation is going to happen in the order component when adding it to the buy button*/
+/* let temp : number = 0;
+ this.TotalPriceOfProducts = 0;
+ // @ts-ignore
+ this.ProductsListByCategory.forEach( prod => prod.totalPriceOfSelectedQuatities = prod.selectedQuantitiesOfProduct* prod.Price)
+ // @ts-ignore
+  this.ProductsListByCategory.forEach(prop =>
+  {
+    // @ts-ignore
+    temp = temp +prop.totalPriceOfSelectedQuatities
+  });
+ this.TotalPriceOfProducts = temp*/
