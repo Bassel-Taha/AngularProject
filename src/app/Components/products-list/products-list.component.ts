@@ -150,6 +150,8 @@ export class ProductsListComponent implements OnChanges{
     console.log(selectedProducts)
     return selectedProducts;
   }
+
+
 }
 
 
