@@ -123,6 +123,8 @@ export class ProductsListComponent implements OnChanges{
     this.TotalPriceEvent.emit(this.ProductsListByCategory);
     this.selectedProductsQuantities = this.ListOfSelectedProductsWithTheQuantities(this.ProductsListByCategory)
     this.ProductsQuantitiesEvent.emit(this.selectedProductsQuantities)
+    //for checking the code
+    /*console.log(this.selectedProductsQuantities)*/
 
   }
 
@@ -147,7 +149,8 @@ export class ProductsListComponent implements OnChanges{
         selectedProducts.push(product)
       }
     }
-    console.log(selectedProducts)
+    //for testing the code
+    /*console.log(selectedProducts)*/
     return selectedProducts;
   }
 }

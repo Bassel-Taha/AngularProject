@@ -25,7 +25,7 @@
   <!--the products component-->
   <app-products-list class="m-4 bg-dark-subtle"
                      [SentCategoryID]="selectedCategoryID_InTheMasterOrder"
-                     (ProductsQuantitiesEvent)="selectedProductsQuantities"
+                     (ProductsQuantitiesEvent)="GettingSelectedProductQuantities($event)"
                      (TotalPriceEvent)="TotalPriceCalc($event)"
                      ></app-products-list>
 
@@ -48,6 +48,7 @@
         <th scope="col">Price</th>
         <th scope="col">Quantity</th>
         <th scope="col">Total Price</th>
+        <th scope="col">Buy</th>
       </tr>
       </thead>
       <tbody>
@@ -58,6 +59,15 @@
               <td>{{ product.Price }}</td>
               <td><input type="number" class=" row form-control border border-1 col-1" [(ngModel)]="product.selectedQuantitiesToBuy!"></td>
               <td class="fw-bold">{{ product.selectedQuantitiesToBuy! * product.Price }}</td>
+              <td>
+                <button class="btn btn-outline-secondary m-4" (click)="BuyButton()">Update Price</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <th scope="row"></th>
+              <td colspan="5">No Products Added To The Cart</td>
+
             </tr>
           }
       </tbody>
