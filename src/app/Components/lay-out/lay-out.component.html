@@ -1,0 +1,19 @@
+<div class="container-fluid p-0 m-0">
+  <header>
+    <div>
+      <app-header class="p-0 m-0" style="width:100vw"></app-header>
+    </div>
+  </header>
+  <section id="body">
+    <div class="container-fluid m-0 p-0" style="height: 100vh">
+      <div class="row p-0 m-0" >
+        <app-side-bar class="p-0 m-0" style="width: 15%;"></app-side-bar>
+        <div class="p-0" style="width: 85%">
+          <router-outlet></router-outlet>
+        </div>
+        <app-footer class="col-12 p-0 m-0"></app-footer>
+      </div>
+    </div>
+  </section>
+</div>
+
