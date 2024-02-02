@@ -37,11 +37,11 @@
             </div>
           </div>
           <!--adding the total price to the order master component-->
-          <div class="justify-content-center align-content-center text-center mx-4">
+          <div class=" row justify-content-center align-content-center text-center mx-4">
             <img LightHouse src="{{Product.ImgUrl}}"
-                 class="text-center align-self-center card-img-bottom img-fluid card-img mb-3"
+                 class="text-center align-self-center img-fluid card-img mb-3 p-0"
                  alt="..." style="width: fit-content ; height: 200px">
-            <input class="align-self-center form-control" (input)="BuyButtonClick()" type="number" [max]="Product.RemainingQuantity"
+            <input class="align-self-center form-control m-3" (input)="BuyButtonClick()" type="number" [max]="Product.RemainingQuantity"
                    [(ngModel)]="Product.selectedQuantitiesToBuy" placeholder="Please Enter the Wanted Quantity">
             <!--removed the buy button and making the change automatically in the -->
             <!--<button class="align-self-center btn col-4 btn-lg btn-outline-primary text-secondary m-3"
