@@ -1,9 +1,6 @@
 <div class="container-fluid m-2 ms-0">
   <div class="row justify-content-center">
-    <h1
-      class="p-2 text-secondary-emphasis display-1 text-decoration-underline border-secondary border-2 border-top col-10">
-      The
-      Products</h1>
+    <h1 class=" text-center p-2 text-secondary-emphasis display-1 text-decoration-underline border-secondary border-2 border-top col-10">The Products</h1>
   </div>
   <div class="row justify-content-around align-content-center">
     <!--using the *ngfor-->
@@ -41,7 +38,8 @@
             <img LightHouse src="{{Product.ImgUrl}}"
                  class="text-center align-self-center img-fluid card-img mb-3 p-0"
                  alt="..." style="width: fit-content ; height: 200px">
-            <input class="align-self-center form-control m-3" (input)="BuyButtonClick()" type="number" [max]="Product.RemainingQuantity"
+            <input class="align-self-center form-control m-3" (input)="BuyButtonClick()" type="number"
+                   [max]="Product.RemainingQuantity"
                    [(ngModel)]="Product.selectedQuantitiesToBuy" placeholder="Please Enter the Wanted Quantity">
             <!--removed the buy button and making the change automatically in the -->
             <!--<button class="align-self-center btn col-4 btn-lg btn-outline-primary text-secondary m-3"

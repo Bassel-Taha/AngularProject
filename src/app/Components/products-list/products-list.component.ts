@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {IProduct} from "../../../Model/i-product";
 import {CurrencyPipe, NgForOf, NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
@@ -21,7 +21,7 @@ import {ProductServiceService} from "../../../Services/product-service.service";
 })
 
 
-export class ProductsListComponent implements OnChanges{
+export class ProductsListComponent implements OnChanges, OnInit{
   ProductsListByCategory: IProduct[] = [];
   @Input() SentCategoryID: number | string = "All Categories" ;
   @Input() selectedProductsQuantities!: IProduct[]
@@ -35,6 +35,11 @@ export class ProductsListComponent implements OnChanges{
     // initialize the productsquantities  event to be an eventemitter
     this.ProductsQuantitiesEvent = new EventEmitter<any>();
   }
+
+  ngOnInit(): void {
+    this.ProductsListByCategory =  this.ProductService.GetProductsByCategoryID(this.SentCategoryID)
+    this.selectedProductsQuantities = this.ProductService.ListOfSelectedProductsWithTheQuantities(this.ProductsListByCategory)
+    }
 
   ngOnChanges(): void {
       this.ProductsListByCategory =  this.ProductService.GetProductsByCategoryID(this.SentCategoryID)
