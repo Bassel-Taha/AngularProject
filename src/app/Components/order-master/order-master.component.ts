@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
-import {Categories} from "../../../Model/categories";
+import {ICategories} from "../../../Model/ICategories";
 import {IProduct} from "../../../Model/i-product";
 import {ProductsListComponent} from "../products-list/products-list.component";
 import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
@@ -31,8 +31,8 @@ import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
 export class OrderMasterComponent implements AfterViewInit{
 
   ProductsListByCategory?: IProduct[];
-  CategoryList: Categories [];
-  selectedCategoryID_InTheMasterOrder?: number | string = "Select Category";
+  CategoryList: ICategories [];
+  selectedCategoryID_InTheMasterOrder: number | string = "Select Category";
   TotalPriceOfProducts: number = 0;
   @ViewChild(ProductsListComponent) productComponentObj!: ProductsListComponent;
   @Input() selectedProductsQuantities!: IProduct[]
