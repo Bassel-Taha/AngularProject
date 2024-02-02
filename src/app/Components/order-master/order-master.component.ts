@@ -16,6 +16,7 @@ import {ICategories} from "../../../Model/ICategories";
 import {IProduct} from "../../../Model/i-product";
 import {ProductsListComponent} from "../products-list/products-list.component";
 import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
+import {ProductServiceService} from "../../../Services/product-service.service";
 
 @Component({
   selector: 'app-order-master',
@@ -29,34 +30,17 @@ import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
   styleUrl: './order-master.component.scss'
 })
 export class OrderMasterComponent implements AfterViewInit{
-
+  catiguryList : ICategories[]
   ProductsListByCategory?: IProduct[];
-  CategoryList: ICategories [];
-  selectedCategoryID_InTheMasterOrder: number | string = "Select Category";
+  selectedCategoryID_InTheMasterOrder: number | string = "All Categories";
   TotalPriceOfProducts: number = 0;
   @ViewChild(ProductsListComponent) productComponentObj!: ProductsListComponent;
   @Input() selectedProductsQuantities!: IProduct[]
 
 
-  constructor() {
-    this.CategoryList = [
-      {
-        ID: 1,
-        Name: "laptop"
-      },
-      {
-        ID: 2,
-        Name: "Mobiles"
-      },
-      {
-        ID: 3,
-        Name: "desktops"
-      },
-      {
-        ID: 4,
-        Name: "Tablets"
-      }
-    ]
+  constructor(private productsService : ProductServiceService) {
+
+    this.catiguryList = productsService.GetAllCategories()
   }
 
 

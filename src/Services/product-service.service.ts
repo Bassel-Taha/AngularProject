@@ -85,6 +85,12 @@ export class ProductServiceService {
 
 
 
+  GetAllCategories()
+  {
+    return this.CategoryList
+  }
+
+
   GetAllProducts():IProduct[]
   {
     return  this.ListOfProducts;
@@ -92,7 +98,7 @@ export class ProductServiceService {
 
   GetProductsByCategoryID(catID: number | string)
   {
-    if (catID ==  "Select Category" )
+    if (catID ==  "All Categories" )
       return this.GetAllProducts()
     else
       return this.ListOfProducts.filter(i=> i.CategoryID == catID)
@@ -103,7 +109,16 @@ export class ProductServiceService {
     return this.ListOfProducts.find(i=> i.ID == productId)
   }
 
+  ListOfSelectedProductsWithTheQuantities(allProductsFromTheProductComponent: IProduct[]): IProduct[] {
+    let selectedProducts: IProduct[] = [] as IProduct[]
+    for (let product of allProductsFromTheProductComponent) {
 
+      if (product.selectedQuantitiesToBuy! > 0 && product != null) {
+        selectedProducts.push(product)
+      }
+    }
+    return selectedProducts;
+  }
 
 
 

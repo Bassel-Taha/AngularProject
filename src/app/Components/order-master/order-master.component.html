@@ -8,8 +8,8 @@
     <div>
       <select class="form-select" aria-label="Disabled select example"
               [(ngModel)]="selectedCategoryID_InTheMasterOrder">
-        <option selected>Select Category</option>
-        <option *ngFor="let category of CategoryList" value="{{category.ID}}">{{ category.Name }}</option>
+        <option selected >All Categories</option>
+        <option *ngFor="let category of catiguryList" value="{{category.ID}}">{{ category.Name }}</option>
       </select>
     </div>
     <!--for displaying the change of the category prop-->
@@ -47,7 +47,7 @@
         <th scope="col">Product's Name</th>
         <th scope="col">Price</th>
         <th scope="col">Quantity</th>
-        <th scope="col">Total Price</th>
+        <th scope="col">Total Price Of Product</th>
         <!--<th scope="col">Buy</th>-->
       </tr>
       </thead>
