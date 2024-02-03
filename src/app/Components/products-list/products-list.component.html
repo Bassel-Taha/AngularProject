@@ -41,6 +41,7 @@
             <input class="align-self-center form-control m-3" (input)="BuyButtonClick()" type="number"
                    [max]="Product.RemainingQuantity"
                    [(ngModel)]="Product.selectedQuantitiesToBuy" placeholder="Please Enter the Wanted Quantity">
+            <a class="btn btn-outline-primary text-center mb-3" [routerLink]="['/Products' , Product.ID]">Details</a>
             <!--removed the buy button and making the change automatically in the -->
             <!--<button class="align-self-center btn col-4 btn-lg btn-outline-primary text-secondary m-3"
                     (click)="BuyButtonClick()">Buy

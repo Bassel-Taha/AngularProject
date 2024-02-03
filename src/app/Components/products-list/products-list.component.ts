@@ -5,6 +5,8 @@ import {FormsModule} from "@angular/forms";
 import {ICategories} from "../../../Model/ICategories";
 import {LightHouseDirective} from "../../Direectives/light-house.directive";
 import {ProductServiceService} from "../../../Services/product-service.service";
+import {Router, RouterLink} from "@angular/router";
+import {routes} from "../../app.routes";
 
 @Component({
   selector: 'app-products-list',
@@ -14,7 +16,8 @@ import {ProductServiceService} from "../../../Services/product-service.service";
     FormsModule,
     CurrencyPipe,
     LightHouseDirective,
-    NgOptimizedImage
+    NgOptimizedImage,
+    RouterLink
   ],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss'
@@ -29,7 +32,7 @@ export class ProductsListComponent implements OnChanges, OnInit{
   @Output()  ProductsQuantitiesEvent : EventEmitter<any> ;
 
 
-  constructor(private ProductService : ProductServiceService) {
+  constructor(private ProductService : ProductServiceService , private router : Router) {
     // initialize the total price event to be an eventemitter
     this.TotalPriceEvent = new EventEmitter<any>();
     // initialize the productsquantities  event to be an eventemitter
@@ -40,6 +43,15 @@ export class ProductsListComponent implements OnChanges, OnInit{
     this.ProductsListByCategory =  this.ProductService.GetProductsByCategoryID(this.SentCategoryID)
     this.selectedProductsQuantities = this.ProductService.ListOfSelectedProductsWithTheQuantities(this.ProductsListByCategory)
     }
+
+    /*can also create the routing by using the router service from angular */
+  RoutingToProductDetails(productID : number)
+  {
+    //this will method will direct the user when called to the written rout
+    //it uses an array the in each element is part of the rout
+    // the following is ...../Products/productID
+    this.router.navigate(['/Products' , productID])
+  }
 
   ngOnChanges(): void {
       this.ProductsListByCategory =  this.ProductService.GetProductsByCategoryID(this.SentCategoryID)

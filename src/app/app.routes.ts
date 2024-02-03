@@ -5,6 +5,7 @@ import {ProductsListComponent} from "./Components/products-list/products-list.co
 import {LayOutComponent} from "./Components/lay-out/lay-out.component";
 import {NotFoundComponent} from "./Components/not-found/not-found.component";
 import {LogInComponent} from "./Components/log-in/log-in.component";
+import {ProductsDetialsComponent} from "./Components/products-detials/products-detials.component";
 
 export const routes: Routes = [
   {path:"login" , component: LogInComponent},
@@ -13,6 +14,7 @@ export const routes: Routes = [
       {path:"Home", component:HomeComponent},
       {path:"Order", component: OrderMasterComponent},
       {path:"Products", component:ProductsListComponent},
+      {path:"Products/:PrdId" , component: ProductsDetialsComponent},
       {path:"**" , component:NotFoundComponent}
     ]},
 ];
