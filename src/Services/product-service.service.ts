@@ -41,7 +41,8 @@ export class ProductServiceService {
         CategoryID: 1,
         ImgUrl: "https://th.bing.com/th/id/OIP.Bha841YBUq6Bx4OA_6SBaQHaFj?rs=1&pid=ImgDetMain",
         totalPriceOfSelectedQuatities :0,
-        selectedQuantitiesToBuy : 0
+        selectedQuantitiesToBuy : 0,
+        brand : "Lenovo"
 
       },
       {
@@ -52,7 +53,8 @@ export class ProductServiceService {
         CategoryID: 1,
         ImgUrl: "https://th.bing.com/th/id/R.1b48232bed11b3988d38772e7bd75476?rik=h5rgDst6yhsAtQ&pid=ImgRaw&r=0",
         totalPriceOfSelectedQuatities :0,
-        selectedQuantitiesToBuy : 0
+        selectedQuantitiesToBuy : 0,
+        brand : "Lenovo"
 
 
       },
@@ -64,7 +66,8 @@ export class ProductServiceService {
         CategoryID: 2,
         ImgUrl: "https://th.bing.com/th/id/OIP.MkZSA_Rn7EQXv7UNxrhLdwHaHa?rs=1&pid=ImgDetMain",
         totalPriceOfSelectedQuatities :0,
-        selectedQuantitiesToBuy : 0
+        selectedQuantitiesToBuy : 0,
+        brand : "Samsung"
 
 
       },
@@ -76,7 +79,8 @@ export class ProductServiceService {
         CategoryID: 1,
         ImgUrl: "https://th.bing.com/th/id/OIP.VAQ7AP-jLts_OZ1bnC4ggQHaEK?rs=1&pid=ImgDetMain",
         totalPriceOfSelectedQuatities :0,
-        selectedQuantitiesToBuy : 0
+        selectedQuantitiesToBuy : 0,
+        brand : "Dell"
 
       }
     ]

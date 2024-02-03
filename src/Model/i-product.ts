@@ -7,4 +7,5 @@ export interface IProduct {
   CategoryID:number;
   totalPriceOfSelectedQuatities? : number;
   selectedQuantitiesToBuy? :number;
+  brand : string;
 }
