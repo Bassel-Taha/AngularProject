@@ -9,6 +9,7 @@ import {ProductsDetialsComponent} from "./Components/products-detials/products-d
 
 export const routes: Routes = [
   {path:"login" , component: LogInComponent},
+  {path:"logout" , component: LogInComponent},
   {path:"" , component: LayOutComponent , children:[
       {path:"" , redirectTo:"/Home" , pathMatch:"full"},
       {path:"Home", component:HomeComponent},
