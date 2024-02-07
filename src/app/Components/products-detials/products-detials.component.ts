@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {ProductServiceService} from "../../../Services/product-service.service";
+import {ProductServiceService} from "../../../Services/ProductsService/product-service.service";
 import {CurrencyPipe, JsonPipe, Location} from "@angular/common";
 import {IProduct} from "../../../Model/i-product";
 import {FormsModule} from "@angular/forms";

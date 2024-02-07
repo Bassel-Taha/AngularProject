@@ -16,7 +16,7 @@ import {ICategories} from "../../../Model/ICategories";
 import {IProduct} from "../../../Model/i-product";
 import {ProductsListComponent} from "../products-list/products-list.component";
 import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
-import {ProductServiceService} from "../../../Services/product-service.service";
+import {ProductServiceService} from "../../../Services/ProductsService/product-service.service";
 
 @Component({
   selector: 'app-order-master',
