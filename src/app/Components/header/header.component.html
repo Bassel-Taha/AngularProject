@@ -27,8 +27,18 @@
       </ul>
       <div class="d-flex my-1">
         <li class="d-flex align-self-end nav-item ">
-          <div class="vr bg-light m-2"></div>
-          <a class="nav-link text-light m-2" routerLink="/login" routerLinkActive = "active">Login</a>
+
+          @if (_AuthService.IslogedInProp == false)
+          {
+            <div class="vr bg-light m-2"></div>
+            <a class="nav-link text-light m-2" routerLink="/login" routerLinkActive = "active">Login</a>
+          } @else {
+            <div class="vr bg-light m-2"></div>
+            <span class="fw-bold text-white align-self-center mx-2">Hi!<p class="fw-bolder">"User"</p></span>
+            <div class= "d-flex vr bg-light m-2"></div>
+            <a class="nav-link text-light m-2 align-self-center" (click) ="_AuthService.LogOut()" routerLink="/Home" routerLinkActive = "active">LogOut</a>
+          }
+
         </li>
       </div>
       <!--<form class="d-flex" role="search">

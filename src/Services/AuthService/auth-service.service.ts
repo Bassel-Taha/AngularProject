@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class AuthServiceService {
 
+  IslogedInProp : boolean = false
   constructor() {
   }
 
@@ -12,14 +13,17 @@ export class AuthServiceService {
       //should send the username and the pass to the Auth API and get the validation token from it
     let  token = "123456789";
     localStorage.setItem('token' , token);
+    this.IsLogedIn
   }
 
   LogOut() {
 localStorage.removeItem('token')
+    this.IsLogedIn
   }
 
   get IsLogedIn():boolean{
 
-    return (localStorage.getItem('token'))? true : false
+    this.IslogedInProp = ((localStorage.getItem('token'))? true : false) ;
+    return this.IslogedInProp
   }
 }
