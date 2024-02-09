@@ -28,7 +28,7 @@
       <div class="d-flex my-1">
         <li class="d-flex align-self-end nav-item ">
 
-          @if (_AuthService.IslogedInProp == false)
+          @if (Isuserlogedin == false)
           {
             <div class="vr bg-light m-2"></div>
             <a class="nav-link text-light m-2" routerLink="/login" routerLinkActive = "active">Login</a>

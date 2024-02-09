@@ -17,24 +17,24 @@ export class LogInComponent implements OnInit{
 
   IsLogedIn! : boolean
   @Input('username') username! : string
-  @Input() password! : string
+  @Input('password') password! : string
 constructor(private _authService : AuthServiceService) {
 }
 
   ngOnInit(): void {
-   this.IsLogedIn =  this._authService.IsLogedIn;
+   this._authService.IsLogedIn.subscribe(status => this.IsLogedIn = status)
     }
 
     Login(username : string , password : string)
     {
       this._authService.LogIN( this.username , this.password);
-      this.IsLogedIn = this._authService.IsLogedIn;
+      this._authService.IsLogedIn.subscribe(status => this.IsLogedIn = status)
     }
 
     Louout()
     {
       this._authService.LogOut();
-      this.IsLogedIn = this._authService.IsLogedIn;
+      this._authService.IsLogedIn.subscribe(status => this.IsLogedIn = status)
     }
 
 }

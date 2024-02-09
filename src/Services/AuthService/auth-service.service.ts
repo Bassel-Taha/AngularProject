@@ -1,18 +1,21 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
 
-  IslogedInProp : boolean = false
+  private IslogedInProp : BehaviorSubject<boolean>
   constructor() {
+    this.IslogedInProp = new BehaviorSubject<boolean>(false)
   }
 
   LogIN(Username : string , Password : string) {
       //should send the username and the pass to the Auth API and get the validation token from it
     let  token = "123456789";
     localStorage.setItem('token' , token);
+
     this.IsLogedIn
   }
 
@@ -21,9 +24,9 @@ localStorage.removeItem('token')
     this.IsLogedIn
   }
 
-  get IsLogedIn():boolean{
+  get IsLogedIn():BehaviorSubject<boolean>{
 
-    this.IslogedInProp = ((localStorage.getItem('token'))? true : false) ;
+    localStorage.getItem('token')? this.IslogedInProp.next(true) : this.IslogedInProp.next(false)
     return this.IslogedInProp
   }
 }
