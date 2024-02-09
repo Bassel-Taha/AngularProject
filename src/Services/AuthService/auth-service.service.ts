@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {routes} from "../../app/app.routes";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,10 @@ export class AuthServiceService {
 
   private IslogedInProp : BehaviorSubject<boolean>
   private _router: Router;
-  constructor(router : Router) {
+  private _location: Location;
+  constructor(router : Router , location : Location) {
     this._router = router;
+    this._location = location;
     this.IslogedInProp = new BehaviorSubject<boolean>(false)
   }
 
@@ -20,7 +23,8 @@ export class AuthServiceService {
     let  token = "123456789";
     localStorage.setItem('token' , token);
     this.IsLogedIn.subscribe()
-    this._router.navigate(['/Home'])
+    this._location.back()
+    //this._router.navigate(['/Home'])
 
 
   }
