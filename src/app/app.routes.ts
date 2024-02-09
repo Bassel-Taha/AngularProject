@@ -6,6 +6,7 @@ import {LayOutComponent} from "./Components/lay-out/lay-out.component";
 import {NotFoundComponent} from "./Components/not-found/not-found.component";
 import {LogInComponent} from "./Components/log-in/log-in.component";
 import {ProductsDetialsComponent} from "./Components/products-detials/products-detials.component";
+import {AuthGuardGuard} from "../../Guards/AuthGard/auth-guard.guard";
 
 export const routes: Routes = [
   {path:"login" , component: LogInComponent},
@@ -13,7 +14,7 @@ export const routes: Routes = [
   {path:"" , component: LayOutComponent , children:[
       {path:"" , redirectTo:"/Home" , pathMatch:"full"},
       {path:"Home", component:HomeComponent},
-      {path:"Order", component: OrderMasterComponent},
+      {path:"Order", component: OrderMasterComponent , canActivate: [AuthGuardGuard]},
       {path:"Products", component:ProductsListComponent},
       {path:"Products/:ProductId" , component: ProductsDetialsComponent},
       {path:"**" , component:NotFoundComponent}

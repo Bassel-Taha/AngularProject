@@ -38,6 +38,6 @@ localStorage.removeItem('token')
   get IsLogedIn(){
 
     localStorage.getItem('token')? this.IslogedInProp.next(true) : this.IslogedInProp.next(false)
-    return this.IslogedInProp.asObservable()
+    return this.IslogedInProp
   }
 }
