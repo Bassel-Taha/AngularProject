@@ -16,8 +16,6 @@ import {FormsModule} from "@angular/forms";
 export class LogInComponent implements OnInit{
 
   IsLogedIn! : boolean
-  @Input('username') username! : string
-  @Input('password') password! : string
 constructor(private _authService : AuthServiceService) {
 }
 
@@ -27,7 +25,7 @@ constructor(private _authService : AuthServiceService) {
 
     Login(username : string , password : string)
     {
-      this._authService.LogIN( this.username , this.password);
+      this._authService.LogIN( username , password);
       this._authService.IsLogedIn.subscribe(status => this.IsLogedIn = status)
     }
 

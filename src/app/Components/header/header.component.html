@@ -34,7 +34,7 @@
             <a class="nav-link text-light m-2" routerLink="/login" routerLinkActive = "active">Login</a>
           } @else {
             <div class="vr bg-light m-2"></div>
-            <span class="fw-bold text-white align-self-center mx-2">Hi!<p class="fw-bolder">"User"</p></span>
+            <span class="fw-bold text-white align-self-center mx-2">Hi!<p class="fw-bolder">{{ _AuthService.userName }}</p></span>
             <div class= "d-flex vr bg-light m-2"></div>
             <a class="nav-link text-light m-2 align-self-center" (click) ="_AuthService.LogOut()" routerLink="/Home" routerLinkActive = "active">LogOut</a>
           }

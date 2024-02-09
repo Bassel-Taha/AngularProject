@@ -9,6 +9,7 @@ import {Location} from "@angular/common";
 })
 export class AuthServiceService {
 
+  userName! : string
   private IslogedInProp : BehaviorSubject<boolean>
   private _router: Router;
   private _location: Location;
@@ -21,12 +22,10 @@ export class AuthServiceService {
   LogIN(Username : string , Password : string) {
       //should send the username and the pass to the Auth API and get the validation token from it
     let  token = "123456789";
-    localStorage.setItem('token' , token);
+    localStorage.setItem('token' , Username+" "+Password);
     this.IsLogedIn.subscribe()
     this._location.back()
-    //this._router.navigate(['/Home'])
-
-
+    this.userName = Username ;
   }
 
   LogOut() {
@@ -37,7 +36,11 @@ localStorage.removeItem('token')
 
   get IsLogedIn(){
 
-    localStorage.getItem('token')? this.IslogedInProp.next(true) : this.IslogedInProp.next(false)
+    if( localStorage.getItem('token')) {
+      this.IslogedInProp.next(true)
+    }else {
+      this.IslogedInProp.next(false)
+    }
     return this.IslogedInProp
   }
 }
