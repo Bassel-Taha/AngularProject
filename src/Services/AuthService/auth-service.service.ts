@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {routes} from "../../app/app.routes";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,9 @@ import {BehaviorSubject, Subject} from "rxjs";
 export class AuthServiceService {
 
   private IslogedInProp : BehaviorSubject<boolean>
-  constructor() {
+  private _router: Router;
+  constructor(router : Router) {
+    this._router = router;
     this.IslogedInProp = new BehaviorSubject<boolean>(false)
   }
 
@@ -15,18 +19,21 @@ export class AuthServiceService {
       //should send the username and the pass to the Auth API and get the validation token from it
     let  token = "123456789";
     localStorage.setItem('token' , token);
+    this.IsLogedIn.subscribe()
+    this._router.navigate(['/Home'])
 
-    this.IsLogedIn
+
   }
 
   LogOut() {
 localStorage.removeItem('token')
-    this.IsLogedIn
+    this.IsLogedIn.subscribe()
+
   }
 
-  get IsLogedIn():BehaviorSubject<boolean>{
+  get IsLogedIn(){
 
     localStorage.getItem('token')? this.IslogedInProp.next(true) : this.IslogedInProp.next(false)
-    return this.IslogedInProp
+    return this.IslogedInProp.asObservable()
   }
 }
