@@ -7,6 +7,7 @@ import {LightHouseDirective} from "../../Direectives/light-house.directive";
 import {ProductServiceService} from "../../../Services/ProductsService/product-service.service";
 import {Router, RouterLink} from "@angular/router";
 import {routes} from "../../app.routes";
+import {ProductsAPIServiceService} from "../../../Services/ProductsServiceAPI/products-apiservice.service";
 
 @Component({
   selector: 'app-products-list',
@@ -32,7 +33,7 @@ export class ProductsListComponent implements OnChanges, OnInit{
   @Output()  ProductsQuantitiesEvent : EventEmitter<any> ;
 
 
-  constructor(private ProductService : ProductServiceService , private router : Router) {
+  constructor(private ProductService : ProductsAPIServiceService , private router : Router) {
     // initialize the total price event to be an eventemitter
     this.TotalPriceEvent = new EventEmitter<any>();
     // initialize the productsquantities  event to be an eventemitter
@@ -40,7 +41,7 @@ export class ProductsListComponent implements OnChanges, OnInit{
   }
 
   ngOnInit(): void {
-    this.ProductsListByCategory =  this.ProductService.GetProductsByCategoryID(this.SentCategoryID)
+    this.ProductService.GetProductsByCategoryID(this.SentCategoryID).subscribe(x => this.ProductsListByCategory = x);
     this.selectedProductsQuantities = this.ProductService.ListOfSelectedProductsWithTheQuantities(this.ProductsListByCategory)
     }
 
@@ -54,7 +55,7 @@ export class ProductsListComponent implements OnChanges, OnInit{
   }
 
   ngOnChanges(): void {
-      this.ProductsListByCategory =  this.ProductService.GetProductsByCategoryID(this.SentCategoryID)
+      this.ProductService.GetProductsByCategoryID(this.SentCategoryID).subscribe(XPathExpression => this.ProductsListByCategory = XPathExpression)
       this.selectedProductsQuantities = this.ProductService.ListOfSelectedProductsWithTheQuantities(this.ProductsListByCategory)
       this.BuyButtonClick()
     }

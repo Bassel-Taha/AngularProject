@@ -3,25 +3,26 @@ import {HttpClient} from "@angular/common/http";
 import {IProduct} from "../../Model/i-product";
 import {Observable, retry} from "rxjs";
 import {ICategories} from "../../Model/ICategories";
-import {environment} from "../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsAPIServiceService {
 
+  private APIURL = 'http://localhost:3000/'
   constructor(private _httpClient : HttpClient) {
 
   }
   GetAllCategories(): Observable<ICategories[]>
   {
-    return this._httpClient.get<IProduct[]>(`${environment.APIURL}Categories`)
+    return this._httpClient.get<IProduct[]>(`${this.APIURL}Categories`)
   }
 
 
   GetAllProducts(): Observable<IProduct[]>
   {
-    return this._httpClient.get<IProduct[]>(`${environment.APIURL}Products`)
+    return this._httpClient.get<IProduct[]>(`${this.APIURL}Products`)
   }
 
   GetProductsByCategoryID(catID: number | string) : Observable<IProduct[]>
@@ -29,13 +30,13 @@ export class ProductsAPIServiceService {
     if (catID ==  "All Categories" )
       return this.GetAllProducts()
     else {
-      return this._httpClient.get<IProduct[]>(`${environment.APIURL}Products?CategoryID=${catID}`)
+      return this._httpClient.get<IProduct[]>(`${this.APIURL}Products?CategoryID=${catID}`)
     }
   }
 
   GetProductByProductId(productId :number):Observable<IProduct>
   {
-    return this._httpClient.get<IProduct>(`${environment.APIURL}Products/${productId}`)
+    return this._httpClient.get<IProduct>(`${this.APIURL}Products/${productId}`)
   }
 
   ListOfSelectedProductsWithTheQuantities(allProductsFromTheProductComponent: IProduct[]): IProduct[] {
