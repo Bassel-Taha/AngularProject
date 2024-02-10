@@ -33,9 +33,9 @@ export class ProductsAPIServiceService {
     }
   }
 
-  GetProductByProductId(productId :number):Observable<IProduct[]>
+  GetProductByProductId(productId :number):Observable<IProduct>
   {
-    return this._httpClient.get<IProduct[]>(`${environment.APIURL}Products/${productId}`)
+    return this._httpClient.get<IProduct>(`${environment.APIURL}Products/${productId}`)
   }
 
   ListOfSelectedProductsWithTheQuantities(allProductsFromTheProductComponent: IProduct[]): IProduct[] {
