@@ -40,7 +40,7 @@ export class ProductsDetialsComponent implements OnInit{
         this._productsService.GetProductByProductId(this.productId!).subscribe(x=> this.selectedProduct = x);
         let allCategory :ICategories[]
         this._productsService.GetAllCategories().subscribe(x=>allCategory = x)
-        this.productCategory = allCategory!.find( i =>i.ID == this.selectedProduct?.CategoryID);
+        this.productCategory = allCategory!.find( i =>i.id == this.selectedProduct?.CategoryID);
         console.log(this.productId)
       })
 

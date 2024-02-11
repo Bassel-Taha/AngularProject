@@ -7,16 +7,18 @@
   <div class="m-3 row justify-content-center align-content-center">
     <div>
       <select class="form-select" aria-label="Disabled select example"
-              [(ngModel)]="selectedCategoryID_InTheMasterOrder">
+      [(ngModel)]="selectedCategoryId_Ordermaster">
         <option selected >All Categories</option>
-        <option *ngFor="let category of catiguryList" value="{{category.ID}}">{{ category.Name }}</option>
+        @for(category of catiguryList ; track $index){
+          <option  value="{{category.id}}">{{ category.Name + ' '}}</option>
+        }
       </select>
     </div>
     <!--for displaying the change of the category prop-->
     <div class="card text-bg-success m-3 " style="max-width: 18rem;">
       <div class="card-header text-center">Categories</div>
       <div class="card-body text-center">
-        <h5 class="card-title">The Selected category = {{ selectedCategoryID_InTheMasterOrder }}</h5>
+        <h5 class="card-title">The Selected category = {{ selectedCategoryId_Ordermaster }}</h5>
       </div>
     </div>
   </div>
@@ -24,7 +26,7 @@
 
   <!--the products component-->
   <app-products-list class="m-4 bg-dark-subtle"
-                     [SentCategoryID]="selectedCategoryID_InTheMasterOrder"
+                     [SentCategoryID]="selectedCategoryId_Ordermaster"
                      (ProductsQuantitiesEvent)="GettingSelectedProductQuantities($event)"
                      (TotalPriceEvent)="TotalPriceCalc($event)"
                      ></app-products-list>

@@ -14,7 +14,7 @@ export class ProductsAPIServiceService {
   }
   GetAllCategories(): Observable<ICategories[]>
   {
-    return this._httpClient.get<IProduct[]>(`${this.APIURL}Categories`)
+    return this._httpClient.get<ICategories[]>(`${this.APIURL}Categories`)
   }
 
 

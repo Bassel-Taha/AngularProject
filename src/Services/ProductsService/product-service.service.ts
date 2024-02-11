@@ -14,19 +14,19 @@ export class ProductServiceService {
     /*the list of categories*/
     this.CategoryList = [
       {
-        ID: 1,
+        id: 1,
         Name: "laptop"
       },
       {
-        ID: 2,
+        id: 2,
         Name: "Mobiles"
       },
       {
-        ID: 3,
+        id: 3,
         Name: "desktops"
       },
       {
-        ID: 4,
+        id: 4,
         Name: "Tablets"
       }
     ]

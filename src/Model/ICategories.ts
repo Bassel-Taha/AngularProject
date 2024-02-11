@@ -1,6 +1,6 @@
 export interface ICategories {
 
-  ID:number ;
+  id:number ;
   Name:string;
 
 }

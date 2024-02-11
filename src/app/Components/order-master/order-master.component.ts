@@ -28,10 +28,10 @@ import {ProductsAPIServiceService} from "../../../Services/ProductsServiceAPI/pr
   templateUrl: './order-master.component.html',
   styleUrl: './order-master.component.scss'
 })
-export class OrderMasterComponent implements AfterViewInit , OnInit{
+export class OrderMasterComponent implements AfterViewInit , OnInit, OnChanges{
   catiguryList! : ICategories[]
   ProductsListByCategory?: IProduct[];
-  selectedCategoryID_InTheMasterOrder: number | string = "All Categories";
+  @Input() selectedCategoryId_Ordermaster: number | string = "All Categories";
   TotalPriceOfProducts: number = 0;
   @ViewChild(ProductsListComponent) productComponentObj!: ProductsListComponent;
   @Input() selectedProductsQuantities!: IProduct[]
@@ -41,13 +41,27 @@ export class OrderMasterComponent implements AfterViewInit , OnInit{
 
   }
 
+  ngOnChanges(): void {
+    this.productsService.GetAllCategories().subscribe(x => {
+      this.catiguryList = x
+      console.log(this.catiguryList)
+    })
+  }
+
   ngOnInit(): void {
-   this.productsService.GetAllCategories().subscribe(x => this.catiguryList = x)
+    this.productsService.GetAllCategories().subscribe(x => {
+      this.catiguryList = x
+      console.log(this.catiguryList)
+    })
+
     }
 
 
   ngAfterViewInit(): void {
-    this.selectedProductsQuantities = this.productComponentObj.selectedProductsQuantities
+    this.productsService.GetProductsByCategoryID(this.selectedCategoryId_Ordermaster).subscribe(x=>this.selectedProductsQuantities = x)
+    //using the view child and the imput decorator to get the data from the child component
+    //todo this.selectedProductsQuantities = this.productComponentObj.selectedProductsQuantities
+
    /* console.log(this.selectedProductsQuantities)*/       //for testing the code
   }
 
@@ -57,7 +71,9 @@ GettingSelectedProductQuantities(productsQuantitiesFromProductComponent :any )
   this.selectedProductsQuantities= productsQuantitiesFromProductComponent
 }
 
-
+GettingTheSelectedCatiguryID(SelectedcatID : any){
+  this.selectedCategoryId_Ordermaster = SelectedcatID
+}
 
   TotalPriceCalc(ProductsListByCategoryFromProductComponent: IProduct[]) {
     this.ProductsListByCategory = ProductsListByCategoryFromProductComponent;
