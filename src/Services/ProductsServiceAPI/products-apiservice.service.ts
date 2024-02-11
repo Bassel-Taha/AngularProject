@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable, NgModule} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {IProduct} from "../../Model/i-product";
 import {Observable, retry} from "rxjs";
 import {ICategories} from "../../Model/ICategories";
-
-
 @Injectable({
   providedIn: 'root'
 })

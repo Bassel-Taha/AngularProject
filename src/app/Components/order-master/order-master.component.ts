@@ -15,8 +15,7 @@ import {NgForOf} from "@angular/common";
 import {ICategories} from "../../../Model/ICategories";
 import {IProduct} from "../../../Model/i-product";
 import {ProductsListComponent} from "../products-list/products-list.component";
-import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
-import {ProductServiceService} from "../../../Services/ProductsService/product-service.service";
+import {ProductsAPIServiceService} from "../../../Services/ProductsServiceAPI/products-apiservice.service";
 
 @Component({
   selector: 'app-order-master',
@@ -29,8 +28,8 @@ import {ProductServiceService} from "../../../Services/ProductsService/product-s
   templateUrl: './order-master.component.html',
   styleUrl: './order-master.component.scss'
 })
-export class OrderMasterComponent implements AfterViewInit{
-  catiguryList : ICategories[]
+export class OrderMasterComponent implements AfterViewInit , OnInit{
+  catiguryList! : ICategories[]
   ProductsListByCategory?: IProduct[];
   selectedCategoryID_InTheMasterOrder: number | string = "All Categories";
   TotalPriceOfProducts: number = 0;
@@ -38,10 +37,13 @@ export class OrderMasterComponent implements AfterViewInit{
   @Input() selectedProductsQuantities!: IProduct[]
 
 
-  constructor(private productsService : ProductServiceService) {
+  constructor(private productsService : ProductsAPIServiceService) {
 
-    this.catiguryList = productsService.GetAllCategories()
   }
+
+  ngOnInit(): void {
+   this.productsService.GetAllCategories().subscribe(x => this.catiguryList = x)
+    }
 
 
   ngAfterViewInit(): void {

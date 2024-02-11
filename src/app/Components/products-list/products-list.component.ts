@@ -4,7 +4,6 @@ import {CurrencyPipe, NgForOf, NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {ICategories} from "../../../Model/ICategories";
 import {LightHouseDirective} from "../../Direectives/light-house.directive";
-import {ProductServiceService} from "../../../Services/ProductsService/product-service.service";
 import {Router, RouterLink} from "@angular/router";
 import {routes} from "../../app.routes";
 import {ProductsAPIServiceService} from "../../../Services/ProductsServiceAPI/products-apiservice.service";
