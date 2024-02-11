@@ -34,7 +34,7 @@ export class ProductServiceService {
     /*the list of products*/
     this.ListOfProducts = [
       {
-        ID: 100,
+        id: 100,
         Name: 'Lenovo Y520',
         Price: 15000,
         RemainingQuantity: 1,
@@ -46,7 +46,7 @@ export class ProductServiceService {
 
       },
       {
-        ID: 200,
+        id: 200,
         Name: 'legion 5',
         Price: 35000,
         RemainingQuantity: 2,
@@ -59,7 +59,7 @@ export class ProductServiceService {
 
       },
       {
-        ID: 300,
+        id: 300,
         Name: 'Note10+',
         Price: 15000,
         RemainingQuantity: 2,
@@ -72,7 +72,7 @@ export class ProductServiceService {
 
       },
       {
-        ID: 400,
+        id: 400,
         Name: 'Dell G15',
         Price: 30000,
         RemainingQuantity: 1,
@@ -110,7 +110,7 @@ export class ProductServiceService {
 
   GetProductByProductId(productId :number)
   {
-    return this.ListOfProducts.find(i=> i.ID == productId)
+    return this.ListOfProducts.find(i=> i.id == productId)
   }
 
   ListOfSelectedProductsWithTheQuantities(allProductsFromTheProductComponent: IProduct[]): IProduct[] {
