@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {IProduct} from "../../Model/i-product";
 import {Observable, retry} from "rxjs";
 import {ICategories} from "../../Model/ICategories";
+import {environment} from "../../environments/environment.development";
 @Injectable({
   providedIn: 'root'
 })
@@ -35,6 +36,10 @@ export class ProductsAPIServiceService {
   GetProductByProductId(productId :number):Observable<IProduct>
   {
     return this._httpClient.get<IProduct>(`${this.APIURL}Products/${productId}`)
+  }
+
+  AddNewProduct (newProd : IProduct){
+    this._httpClient.post(`${environment.API_URL}Products`, newProd)
   }
 
   ListOfSelectedProductsWithTheQuantities(allProductsFromTheProductComponent: IProduct[]): IProduct[] {
