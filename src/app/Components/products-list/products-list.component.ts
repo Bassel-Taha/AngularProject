@@ -7,6 +7,7 @@ import {LightHouseDirective} from "../../Direectives/light-house.directive";
 import {Router, RouterLink} from "@angular/router";
 import {routes} from "../../app.routes";
 import {ProductsAPIServiceService} from "../../../Services/ProductsServiceAPI/products-apiservice.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-products-list',
@@ -24,15 +25,15 @@ import {ProductsAPIServiceService} from "../../../Services/ProductsServiceAPI/pr
 })
 
 
-export class ProductsListComponent implements OnChanges, OnInit{
+export class ProductsListComponent implements OnChanges, OnInit {
   ProductsListByCategory: IProduct[] = [];
-  @Input() SentCategoryID: number | string = "All Categories" ;
+  @Input() SentCategoryID: number | string = "All Categories";
   @Input() selectedProductsQuantities!: IProduct[]
-  @Output()  TotalPriceEvent : EventEmitter<any> ;
-  @Output()  ProductsQuantitiesEvent : EventEmitter<any> ;
+  @Output() TotalPriceEvent: EventEmitter<any>;
+  @Output() ProductsQuantitiesEvent: EventEmitter<any>;
 
 
-  constructor(private ProductService : ProductsAPIServiceService , private router : Router) {
+  constructor(private ProductService: ProductsAPIServiceService, private router: Router, private snackbar :MatSnackBar) {
     // initialize the total price event to be an eventemitter
     this.TotalPriceEvent = new EventEmitter<any>();
     // initialize the productsquantities  event to be an eventemitter
@@ -42,27 +43,24 @@ export class ProductsListComponent implements OnChanges, OnInit{
   ngOnInit(): void {
     this.ProductService.GetProductsByCategoryID(this.SentCategoryID).subscribe(x => this.ProductsListByCategory = x);
     this.selectedProductsQuantities = this.ProductService.ListOfSelectedProductsWithTheQuantities(this.ProductsListByCategory)
-    }
+  }
 
-    /*can also create the routing by using the router service from angular */
-  RoutingToProductDetails(productID : number)
-  {
+  /*can also create the routing by using the router service from angular */
+  RoutingToProductDetails(productID: number) {
     //this will method will direct the user when called to the written rout
     //it uses an array the in each element is part of the rout
     // the following is ...../Products/productID
-    this.router.navigate(['/Products' , productID])
+    this.router.navigate(['/Products', productID])
   }
 
   ngOnChanges(): void {
-      this.ProductService.GetProductsByCategoryID(this.SentCategoryID).subscribe(XPathExpression => this.ProductsListByCategory = XPathExpression)
-      this.selectedProductsQuantities = this.ProductService.ListOfSelectedProductsWithTheQuantities(this.ProductsListByCategory)
-      this.BuyButtonClick()
-    }
+    this.ProductService.GetProductsByCategoryID(this.SentCategoryID).subscribe(XPathExpression => this.ProductsListByCategory = XPathExpression)
+    this.selectedProductsQuantities = this.ProductService.ListOfSelectedProductsWithTheQuantities(this.ProductsListByCategory)
+    this.BuyButtonClick()
+  }
 
 
-
-  BuyButtonClick()
-  {
+  BuyButtonClick() {
     // sending the productList with the total prices of each selected product quantities to get the total price of each product to get full total price
     this.TotalPriceEvent.emit(this.ProductsListByCategory);
     //using this listing method to filter the 0 quantities from the sent-list
@@ -71,6 +69,23 @@ export class ProductsListComponent implements OnChanges, OnInit{
     this.ProductsQuantitiesEvent.emit(this.selectedProductsQuantities)
   }
 
+
+  AddNewProduct() {
+    this.ProductService.AddNewProduct({
+      CategoryID: 4,
+      ImgUrl: "dm;slma",
+      Name: "new product",
+      Price: 0,
+      RemainingQuantity: 2,
+      brand: "new brand",
+      selectedQuantitiesToBuy: 0,
+      totalPriceOfSelectedQuatities: 0
+    }).subscribe(x => console.log(x))
+    this.snackbar.open("New Product Added", "Close", {duration: 2000 , horizontalPosition : "left" , verticalPosition : "bottom"}
+    )
+
+    this.router.navigate(['/Products'])
+  }
 
 }
 
