@@ -79,10 +79,19 @@ export class ProductsListComponent implements OnChanges, OnInit {
       RemainingQuantity: 2,
       brand: "new brand",
       selectedQuantitiesToBuy: 0,
-      totalPriceOfSelectedQuatities: 0
-    }).subscribe(x => console.log(x))
-    this.snackbar.open("New Product Added", "Close", {duration: 2000 , horizontalPosition : "left" , verticalPosition : "bottom"}
-    )
+      totalPriceOfSelectedQuatities: 0,
+      id: 5000
+    }).subscribe({
+      next: x => {this.snackbar.open("New Product Added", "exit", {duration: 5000 , horizontalPosition : "right" , verticalPosition : "top"})},
+      error: error => {this.snackbar.open("Error adding the new product", "exit", {duration: 5000 , horizontalPosition : "right" , verticalPosition : "top"})},
+      complete: () => {console.log("subscriber completed complete")}})
+
+
+      /*.subscribe( x => {this.snackbar.open("New Product Added", "exit", {duration: 2000 , horizontalPosition : "left" , verticalPosition : "bottom"})},
+        error => {this.snackbar.open("New Product Added", "exit", {duration: 2000 , horizontalPosition : "left" , verticalPosition : "bottom"})},
+        () => {
+          console.log("subscriber completed complete")}
+      )*/
 
     this.router.navigate(['/Products'])
   }

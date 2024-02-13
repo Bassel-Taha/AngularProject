@@ -46,21 +46,13 @@ export class ProductsAPIServiceService {
     return this._httpClient.get<IProduct>(`${this.APIURL}Products/${productId}`)
   }
 
-  AddNewProduct(newProd: IProduct) : Observable<IProduct> {
-    console.log(newProd)
-
-    /*return this._httpClient.post<IProduct> (`${environment.API_URL}Products`, JSON.stringify(newProd), {
-      headers : new HttpHeaders({
-        'Content-Type':'application.json',
-        //Authorization: ''
-      })
-    }).pipe(retry(2))*/
-
-    return this._httpClient.post<IProduct>(`${environment.API_URL}Products`, JSON.stringify(newProd), this.httpOptions).pipe(retry(2), catchError((handleError: HttpErrorResponse) => {
-      return throwError(() => {
-        console.log(handleError.message)
-      })
-    }))
+  AddNewProduct(newProd: IProduct): Observable<IProduct> {
+    return this._httpClient.post<IProduct>(`${environment.API_URL}Products`, JSON.stringify(newProd), this.httpOptions)
+      .pipe(catchError((handleError: HttpErrorResponse) => {
+        return throwError(() => {
+          console.log(handleError.message)
+        })
+      }))
   }
 
   ListOfSelectedProductsWithTheQuantities(allProductsFromTheProductComponent: IProduct[]): IProduct[] {
