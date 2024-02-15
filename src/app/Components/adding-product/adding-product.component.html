@@ -1,1 +1,55 @@
-<p>adding-product works!</p>
+<div class="m-4 d-flex row justify-content-center align-content-start" style="height:100vw">
+  <div class="card m-3" style="height: fit-content">
+    <div class="card-body ">
+      <h4 class=" text-center text-danger fw-bold card-title">To be removed</h4>
+      <p class="card-text text-danger" style="height: fit-content">{{ newPrd | json }}</p>
+    </div>
+  </div>
+
+  <div class="card m-2" style="height: fit-content">
+      <form class="card-body" type="submit" >
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Product Name</span>
+          <input type="text" class="form-control" placeholder="Product's Name" aria-label="Username" aria-describedby="basic-addon1" name="name" [(ngModel)]="newPrd.Name">
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon2">Category</span>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="newPrd.CategoryID">
+            @for (cat of catList; track $index)
+            {
+              <option value="{{cat.id}}">{{cat.Name}}</option>
+            }
+          </select>
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">InStock Quantity</span>
+          <input type="number" name="quantity" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Quantity" min="0" [(ngModel)]="newPrd.RemainingQuantity">
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">$</span>
+          <input type="number" name="price" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Price" min="0" [(ngModel)]="newPrd.Price">
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Brand</span>
+          <input type="text" name="brand" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Product's Brand" [(ngModel)]="newPrd.brand">
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="file" name="image" class="form-control" placeholder="Please Select File" aria-label="Image" [(ngModel)]="newPrd.ImgUrl">
+
+        </div>
+
+        <div class="input-group">
+          <textarea class="form-control" aria-label="Description" placeholder="Product's Description"></textarea>
+        </div>
+
+        <div class="input-group d-flex row  justify-content-end text-center  ">
+          <button type="submit" class="m-4 col-lg-1 col-sm-2 btn btn-lg btn-outline-success"><p class="h5 p-0 m-0 my-1">Add</p> </button>
+        </div>
+      </form>
+  </div>
+</div>
