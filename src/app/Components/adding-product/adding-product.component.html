@@ -3,6 +3,8 @@
     <div class="card-body ">
       <h4 class=" text-center text-danger fw-bold card-title">To be removed</h4>
       <p class="card-text text-danger" style="height: fit-content">{{ newPrd | json }}</p>
+      <hr>
+      <p class="card-text text-danger" style="height: fit-content">{{ prodName.errors | json }}</p>
     </div>
   </div>
 
@@ -10,12 +12,20 @@
       <form class="card-body" type="submit" >
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Product Name</span>
-          <input type="text" class="form-control" placeholder="Product's Name" aria-label="Username" aria-describedby="basic-addon1" name="name" [(ngModel)]="newPrd.Name">
+          <input #prodName='ngModel' type="text" class="form-control" placeholder="Product's Name" aria-label="Username" aria-describedby="basic-addon1" name="name" [(ngModel)]="newPrd.Name" required pattern="[A-Za-z].{5,}">
+          <div class="col-lg-12 col-3 alert alert-danger" [hidden]="prodName.valid || prodName.untouched">
+            @if (prodName.errors?.['required']){
+              <small>Product Name is required</small>
+            }
+            @if(prodName.errors?.['pattern']){
+              <small>Product Name must be at least 5 characters</small>
+            }
+          </div>
         </div>
 
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon2">Category</span>
-          <select class="form-select" aria-label="Default select example" [(ngModel)]="newPrd.CategoryID">
+          <select class="form-select" aria-label="Default select example" name="Category" [(ngModel)]="newPrd.CategoryID">
             @for (cat of catList; track $index)
             {
               <option value="{{cat.id}}">{{cat.Name}}</option>
