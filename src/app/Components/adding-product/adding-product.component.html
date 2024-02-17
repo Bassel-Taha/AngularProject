@@ -33,7 +33,7 @@
           }
         </select>
         <div class="col-lg-12 col-3 alert alert-danger" [hidden]="prodCat.valid || prodCat.untouched">
-          @if (prodName.errors?.['required']) {
+          @if (prodCat.errors?.['required']) {
             <small>Product Category is required</small>
           }
         </div>
@@ -90,8 +90,13 @@
       </div>
 
       <div class="input-group d-flex row  justify-content-end text-center  ">
+        @if(productForm.invalid) {
+          <button type="submit" class="m-4 col-lg-1 col-sm-2 btn btn-lg btn-outline-secondary" disabled><p class="h5 p-0 m-0 my-1">
+            Add</p></button>
+        }@else{
         <button [disabled]="productForm.invalid" type="submit" class="m-4 col-lg-1 col-sm-2 btn btn-lg btn-outline-success"><p class="h5 p-0 m-0 my-1">
           Add</p></button>
+        }
       </div>
     </form>
   </div>
