@@ -25,7 +25,7 @@ export class HomeComponent {
   backgroundImage:string
   IsImageShowen:boolean = true;
   constructor(private httpClient : HttpClient) {
-    this.Data = new StoredData("https://picsum.photos/1168/250", "Bassel Taha ", ["portsaid", "cairo", "damieta"])
+    this.Data = new StoredData("https://picsum.photos/1168/250", "Hi👋, I am Bassel Taha", ["portsaid", "cairo", "damieta"])
     this.backgroundImage = this.Data.bgImage
   }
 

@@ -8,9 +8,11 @@ import {LogInComponent} from "./Components/log-in/log-in.component";
 import {ProductsDetialsComponent} from "./Components/products-detials/products-detials.component";
 import {AuthGuardGuard} from "../../Guards/AuthGard/auth-guard.guard";
 import {AddingProductComponent} from "./Components/adding-product/adding-product.component";
+import {RegisterUserComponent} from "./Components/register-user/register-user.component";
 
 export const routes: Routes = [
   {path:"login" , component: LogInComponent},
+  {path:"Register" , component: RegisterUserComponent},
   {path:"logout" , component: LogInComponent},
   {path:"" , component: LayOutComponent , children:[
       {path:"" , redirectTo:"/Home" , pathMatch:"full"},

@@ -3,7 +3,17 @@
   <div class="container-fluid">
     <div class="row m-0">
       <div class="col-10">
-        <h1 class="ms-5">{{Data.name}}</h1>
+        <div class="ms-5 display-5 fw-bold">{{Data.name}}</div>
+        <p>
+          <em>
+            Hello, I am Bassel Taha a <b> Full Stack "Angular & .Net Developer" </b> I'm An Engineer Graduated From <a href="https://psu.edu.eg/en/home-en/"> <b>Port Said University</b>, Egypt, Port-Said </a>.
+            <b>who's a passionate self-learner</b> <img src="https://raw.githubusercontent.com/TheDudeThatCode/TheDudeThatCode/master/Assets/Developer.gif" width="30px"> and a <b>.NET Back-End & Angular Front End Developer</b>&nbsp;<img src="https://raw.githubusercontent.com/TheDudeThatCode/TheDudeThatCode/master/Assets/Designer.gif" width="36px"> and, who is also <b>passionate</b>
+            with <b>Programming</b> and  <b>eager</b> to Hone my technical skills and work experience by working on dynamic projects and collaborative team settings.
+          </em>
+          <br>
+          <!--  <img src="https://media.giphy.com/media/gH3LO09IOiZIqePwv9/giphy.gif" width="50" /> <b><i align="center">Thought : "Life is full of choices…choose wisely!”</i></b> <img src="https://media.giphy.com/media/qjqUcgIyRjsl2/giphy.gif" width="50" />
+          -->
+        </p>
       </div>
       <div class="col-2 ">
         <button class="btn btn-outline-dark position-absolute end-0 m-1" (click)="ToggleImage()"  >Show/Hide Image</button>
@@ -11,7 +21,7 @@
     </div>
   </div>
   <ul >
-    <h5 class="text-decoration-underline">residences:</h5>
+    <h2 class="text-decoration-underline">residences:</h2>
     <li *ngFor="let branch of Data.branches">
       {{ branch }}
     </li>
